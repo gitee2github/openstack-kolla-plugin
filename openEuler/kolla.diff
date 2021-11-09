@@ -1,0 +1,42 @@
+diff --git a/common/config.py b/common/config.py
+index e29088ba..3559dd1c 100755
+--- a/common/config.py
++++ b/common/config.py
+@@ -19,7 +19,7 @@ from oslo_config import types
+ from kolla.version import version_info as version
+ 
+ 
+-BASE_OS_DISTRO = ['centos', 'rhel', 'ubuntu', 'oraclelinux', 'debian']
++BASE_OS_DISTRO = ['centos', 'rhel', 'ubuntu', 'oraclelinux', 'debian', 'openeuler']
+ BASE_ARCH = ['x86_64', 'ppc64le', 'aarch64']
+ DEFAULT_BASE_TAGS = {
+     'centos': '7',
+@@ -27,6 +27,7 @@ DEFAULT_BASE_TAGS = {
+     'oraclelinux': '7-slim',
+     'debian': 'stretch-backports',
+     'ubuntu': '18.04',
++    'openeuler': '20.03-lts-sp2'
+ }
+ DISTRO_RELEASE = {
+     'centos': '7',
+@@ -34,6 +35,7 @@ DISTRO_RELEASE = {
+     'oraclelinux': '7',
+     'debian': 'stretch-backports',
+     'ubuntu': '18.04',
++    'openeuler': '20'
+ }
+ 
+ # This is noarch repository so we will use it on all architectures
+diff --git a/image/build.py b/image/build.py
+index 98b42f22..70d8d71e 100755
+--- a/image/build.py
++++ b/image/build.py
+@@ -687,7 +687,7 @@ class KollaWorker(object):
+                              conf.rpm_setup_config if repo_file is not None])
+         self.rpm_setup = self.build_rpm_setup(rpm_setup_config)
+ 
+-        rh_base = ['centos', 'oraclelinux', 'rhel']
++        rh_base = ['centos', 'oraclelinux', 'rhel', 'openeuler']
+         rh_type = ['source', 'binary', 'rdo', 'rhos']
+         deb_base = ['ubuntu', 'debian']
+         deb_type = ['source', 'binary']
